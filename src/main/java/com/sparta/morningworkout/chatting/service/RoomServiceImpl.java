@@ -24,6 +24,7 @@ public class RoomServiceImpl implements RoomService {
 	 * 채팅방 만들기
 	 *
 	 */
+	@Override
 	public void createRoom(long productId, long customerId) {
 		Product product = productRepository.findById(productId).orElseThrow(
 			() -> new IllegalArgumentException("상품이 존재하지 않습니다.")
