@@ -34,22 +34,4 @@ public class ProfileServiceImpl implements ProfileService {
 		);
 		return new ShowProfileResponseDto(profile);
 	}
-
-	// @Override
-	// public void updateSellerProfile(long id, UpdateSellerProfileRequestDto request, String username) {
-	// 	Profile profile = profileRepository.findById(id).orElseThrow(
-	// 		() -> new RuntimeException("수정할 프로필이 없습니다.")
-	// 	);
-	// 	User user = userRepository.findByUsername(username).orElseThrow(
-	// 		() -> new IllegalArgumentException("사용자가 존재하지 않습니다.")
-	// 	);
-	//
-	// 	if (profile.checkAuthorization(user)) {
-	// 		profile.sellerUpdate(request);
-	// 		this.profileRepository.save(profile);
-	// 	} else {
-	// 		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "본인 프로필만 수정할 수 있습니다.");
-	// 	}
-
-	// }
 }

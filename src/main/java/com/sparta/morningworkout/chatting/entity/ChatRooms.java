@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sparta.morningworkout.entity.Product;
-import com.sparta.morningworkout.entity.User;
+import com.sparta.morningworkout.entity.Profile;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +32,7 @@ public class ChatRooms {
 	@Column(nullable = false, name = "product_id")
 	private long productId;
 
-	@Column(nullable = false, name = "seller_id")
+	@Column(nullable = false, name = "seller")
 	private long sellerId;
 
 	@Column(nullable = false, name = "customer_id")
@@ -40,10 +41,14 @@ public class ChatRooms {
 	@OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE)
 	private List<Message> message = new ArrayList<>();
 
-	public ChatRooms(Product product, User user) {
+	@ManyToOne
+	private Profile profile;
+
+	public ChatRooms(Product product, Profile profile) {
 		this.productId = product.getId();
 		this.sellerId = product.getUserId();
-		this.customerId = user.getId();
+		this.customerId = profile.getId();
+		this.profile = profile;
 	}
 
 	// public boolean checkAuthorization(User user) {
