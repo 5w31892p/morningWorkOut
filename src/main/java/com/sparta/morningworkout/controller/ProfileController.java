@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sparta.morningworkout.dto.profile.ShowCustomerProfileResponseDto;
-import com.sparta.morningworkout.dto.profile.UpdateCustomerProfileRequestDto;
+import com.sparta.morningworkout.dto.profile.ShowProfileResponseDto;
+import com.sparta.morningworkout.dto.profile.UpdateProfileRequestDto;
 import com.sparta.morningworkout.security.UserDetailsImpl;
 import com.sparta.morningworkout.service.ProfileServiceImpl;
 
@@ -26,7 +26,8 @@ public class ProfileController {
 	//따로 일치하는 유저인지 검사해주는 api가 필요할듯함
 	@PutMapping("/update/{profileId}")
 	public ResponseEntity<String> updateProfile(@PathVariable long profileId,
-		@RequestBody UpdateCustomerProfileRequestDto request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		@RequestBody UpdateProfileRequestDto request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
 		if (profileId != userDetails.getUserId()) {
 			return new ResponseEntity<>("프로필은 본인만 수정할수 있습니다.", HttpStatus.FORBIDDEN);
 		}
@@ -35,14 +36,14 @@ public class ProfileController {
 	}
 
 	@GetMapping("/{profileId}")
-	public ResponseEntity<ShowCustomerProfileResponseDto> showMyProfile(@PathVariable Long profileId,
+	public ResponseEntity<ShowProfileResponseDto> showMyProfile(@PathVariable Long profileId,
 		@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
 		if (profileId != userDetails.getUserId()) {
 			new ResponseEntity<>("프로필은 본인만 조회할수 있습니다.", HttpStatus.FORBIDDEN);
 		}
 
-		ShowCustomerProfileResponseDto showProfile = profileService.showMyProfile(userDetails.getUserId());
+		ShowProfileResponseDto showProfile = profileService.showMyProfile(userDetails.getUserId());
 		return ResponseEntity.status(HttpStatus.OK).body(showProfile);
 	}
 }

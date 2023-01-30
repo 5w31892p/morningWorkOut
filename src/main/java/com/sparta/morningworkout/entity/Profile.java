@@ -1,9 +1,6 @@
 package com.sparta.morningworkout.entity;
 
-import java.util.Objects;
-
-import com.sparta.morningworkout.dto.profile.UpdateCustomerProfileRequestDto;
-import com.sparta.morningworkout.dto.profile.UpdateSellerProfileRequestDto;
+import com.sparta.morningworkout.dto.profile.UpdateProfileRequestDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,19 +41,9 @@ public class Profile extends TimeStamped{
 		this.category = sellerRegist.getCategory();
 	}
 
-	public void profileUpdate(UpdateCustomerProfileRequestDto request) {
+	public void profileUpdate(UpdateProfileRequestDto request) {
 		this.nickname = request.getNickname();
 		this.infoContent = request.getInfoContent();
 		this.category = request.getCategory();
-	}
-
-	public void sellerUpdate(UpdateSellerProfileRequestDto request) {
-		this.nickname = request.getNickname();
-		this.infoContent = request.getInfoContent();
-		this.category = request.getCategory();
-	}
-
-	public boolean checkAuthorization(User user) {
-		return Objects.equals(id, user.getId());
 	}
 }

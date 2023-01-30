@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class ShowSellerProfileResponseDto {
+public class ShowProfileResponseDto {
     private String nickname;
 //    private String image;
     private String infoContent;
     private CategoryEnum category;
 
-	public ShowSellerProfileResponseDto(Profile profiles) {
+	public ShowProfileResponseDto(Profile profiles) {
 		this.nickname = profiles.getNickname();
 		this.infoContent = profiles.getInfoContent();
 		this.category = profiles.getCategory();

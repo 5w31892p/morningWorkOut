@@ -2,14 +2,14 @@ package com.sparta.morningworkout.service.serviceInterface;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sparta.morningworkout.dto.profile.ShowCustomerProfileResponseDto;
-import com.sparta.morningworkout.dto.profile.UpdateCustomerProfileRequestDto;
+import com.sparta.morningworkout.dto.profile.ShowProfileResponseDto;
+import com.sparta.morningworkout.dto.profile.UpdateProfileRequestDto;
 
 public interface ProfileService {
-    void updateProfile(long id, UpdateCustomerProfileRequestDto request, long userId);
+    void updateProfile(long id, UpdateProfileRequestDto request, long userId);
     // ShowSellerProfileResponseDto showProfile(long id);
 
     @Transactional(readOnly = true)
-    ShowCustomerProfileResponseDto showMyProfile(long id);
+    ShowProfileResponseDto showMyProfile(long id);
 
 }
