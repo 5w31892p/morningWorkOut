@@ -3,10 +3,12 @@ package com.sparta.morningworkout.chatting.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sparta.morningworkout.chatting.dto.RoomDto;
 import com.sparta.morningworkout.chatting.service.RoomService;
 import com.sparta.morningworkout.security.UserDetailsImpl;
 
@@ -22,9 +24,16 @@ public class RoomController {
 	 */
 
 	@PostMapping("/chatrooms/{productId}")
-	public ResponseEntity<String> createRoom(@PathVariable Long productId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+	public ResponseEntity<String> createRoom(@PathVariable Long productId,
+		@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		roomService.createRoom(productId, userDetails.getUserId());
 
 		return new ResponseEntity<>("채팅방 생성 완료", HttpStatus.CREATED);
+	}
+
+	@GetMapping("/chatrooms/{roomId}")
+	public ResponseEntity<RoomDto> gochat(@PathVariable long roomId) {
+		RoomDto room = roomService.goChat(roomId);
+		return ResponseEntity.status(HttpStatus.OK).body(room);
 	}
 }
